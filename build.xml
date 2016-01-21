@@ -1,0 +1,39 @@
+﻿<project name="TK1-4thProgExc-JavaNTP" default="run">
+
+<target name="init">
+	<echo>+-----Java NTP------+</echo>
+	<echo>+</echo>
+	<echo>+ TK1 4th Programming Exercise</echo>
+	<echo>+ Team members:</echo>
+	<echo>+		- Jason Christian</echo>
+	<echo>+		- Dimas Prawita</echo>
+	<echo>+		- Subhadeep Manna</echo>
+	<echo>+		- Parvez Ahmad</echo>
+	<echo>+-----------------------------------+</echo>
+		
+	<presetdef name="javac">
+		<javac includeantruntime="false"/>
+	</presetdef>
+
+	<path id="path.bin">
+		<pathelement path="bin"/>	
+	</path>
+
+</target>
+
+<target name="compile" depends="init">
+	<javac destdir="bin" srcdir="src"/>
+</target>
+
+<target name="run" depends="compile">
+	<parallel>
+		<java taskname="Server" classname="TimeServer" fork="yes">
+			<classpath refid="path.bin"/>
+		</java>
+		<java taskname="Client" classname="TimeClient" fork="yes">
+			<classpath refid="path.bin"/>
+		</java>
+	</parallel>
+</target>
+
+</project>
